@@ -19,11 +19,6 @@ public class Walking : MonoBehaviour
         transform.Translate(0, 0, translation);
         transform.Rotate(0, rotation, 0);
 
-        if (Input.GetKeyDown("right"))
-        {
-           
-        }
-
-
+ 
     }
 }

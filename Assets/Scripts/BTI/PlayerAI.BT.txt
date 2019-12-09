@@ -1,4 +1,38 @@
 tree("Root")
-	GoToBall	
+	parallel
+		repeat mute tree("My_Turn")
+		repeat mute tree("Enemy_Turn")
+
+
+tree("My_Turn")
+	while IsMyTurn
+		sequence
+			GoToBall
+			while not SeePlayer
+				tree("Attack")
+
+
+tree("Enemy_Turn")
+	while not IsMyTurn
+		fallback
+			while IsEnemyCloseToGate
+				sequence
+					GoToMyGate
+					GateKeeper
+			while not IsEnemyCloseToGate
+				sequence
+					GoToEnemy
+					BlockEnemy
+
+
+tree("Attack")
+	sequence
+        Wait(5.0)
+        LookAtTarget
+        Wait(2.0)
+        KickToGate
+		SwitchTurn
+				
+
 	
 			
