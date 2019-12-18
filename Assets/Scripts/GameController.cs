@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         turn = PLAYER;
-        Debug.Log("***************turn:"+turn+"*******************");
+        Debug.Log("************ *******turn:"+turn+"******* **************");
         player_score = 0;
         AI_score = 0;
     }
