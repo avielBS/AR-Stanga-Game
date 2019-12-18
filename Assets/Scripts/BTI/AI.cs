@@ -12,7 +12,8 @@ public class AI : MonoBehaviour
     public Transform enemy_gate;
     public Transform my_gate;
     public GameObject AI_player;
-    public bool is_my_turn = false;
+    private GameController game_controller;
+    public int turn;
     float accuraty = 0.5f;
     const float FAR_AWAY =1f;
     const float CLOSE = 2.5f;
@@ -20,27 +21,38 @@ public class AI : MonoBehaviour
     const float ROTATION_SPEED = 0.8f;
     float visibleRange = 2.0f;
 
+    private void Awake()
+    {
+        game_controller = GameObject.FindObjectOfType<GameController>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+       anim = GetComponent<Animator>();
+       turn = game_controller.GetTurn();
              
     }
     [Task]
    public bool IsMyTurn()
     {
-        if (is_my_turn==true)
+        if (turn==game_controller.AI_PLAYER)
             return true;
         return false;
-
     }
     [Task]
    public void SwitchTurn()
     {
-        is_my_turn = !is_my_turn;
+        if (IsMyTurn())
+        {
+           turn = game_controller.PLAYER;
+        }
+        else
+        {
+            turn = game_controller.AI_PLAYER;
+        }
+        game_controller.SetTurn(turn);
         Task.current.Succeed();
-       
-
     }
 
     [Task]
